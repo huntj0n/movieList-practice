@@ -22,28 +22,46 @@ module.exports = {
                 res.status(500).send(err)
             })
     },
+    // editMovie: (req, res) => {
+    //     const db = req.app.get('db');
+    //     const { id } = req.params;
+    //     const { title, director, image, rating } = req.body;
+    //     db.movies.edit_movie(id, title, director, image, rating)
+    //         .then((movies) => res.status(200).send(movies))
+    //         .catch((err) => {
+    //             console.log(err);
+    //             res.status(500).send(err)
+    //         })
+    // },
+    // deleteMovie: (req, res) => {
+    //     const db = req.app.get('db')
+    //     const { id } = req.params;
+        
+    //     db.movies.delete_movie(id)
+    //         .then((movies) => res.status(200).send(movies))
+    //         .catch((err) => {
+    //             console.log(err);
+    //             res.status(500).send(err)
+    //         })
+    // },
     editMovie: (req, res) => {
         const db = req.app.get('db');
-        const { id } = req.params;
-        const { title, director, image, rating } = req.body;
-        db.movies
-            .edit_movie(id, title, director, image, rating)
-            .then((movies) => res.status(200).send(movies))
-            .catch((err) => {
-                console.log(err);
-                res.status(500).send(err)
-            })
+        const {id} = req.params;
+        const {title, director, image, rating} = req.body;
+
+        db.movies.edit_movie(id, title, director, image, rating).then((movies) => res.status(200).send(movies))
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send(err)
+        })
     },
     deleteMovie: (req, res) => {
-        const db = req.app.get('db')
-        const { id } = req.params;
+        const db = req.app.get('db');
+        const {id} = req.params;
         
-        db.movies
-            .delete_movie(id)
-            .then((movies) => res.status(200).send(movies))
-            .catch((err) => {
-                console.log(err);
-                res.status(500).send(err)
-            })
-    },
+        db.movies.delete_movie(id).then((movies) => res.status(200).send(movies)).catch((err) => {
+            console.log(err)
+            res.status(500).send(err)
+        });
+    }
 }

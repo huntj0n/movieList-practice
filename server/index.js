@@ -30,7 +30,7 @@ massive({
 //ENDPOINTS
 app.get('/api/movies', movieCtrl.getMovies)
 app.post('/api/movies', movieCtrl.addMovie)
-app.put('/api/movies:id', movieCtrl.editMovie)
-app.delete('/api/movies:id', movieCtrl.deleteMovie)
+app.put('/api/movies/:id', movieCtrl.editMovie)
+app.delete('/api/movies/:id', movieCtrl.deleteMovie)
 
 
