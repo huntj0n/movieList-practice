@@ -4,10 +4,9 @@ const express = require('express');
 const massive = require('massive');
 
 //CONTROLLERS
-const movieCtrl = require('./Controllers/movieControllers');
+const movieCtrl = require('./Controllers/movieControllers.js');
 
-const { SERVER_PORT,
-        CONNECTION_STRING } = process.env;
+const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
 //MIDDLEWARE
 const app = express();
@@ -15,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 massive({
-    connectionSTring: CONNECTION_STRING,
+    connectionString: CONNECTION_STRING,
     ssl: {
         rejectUnauthorized: false
     }
@@ -33,3 +32,5 @@ app.get('/api/movies', movieCtrl.getMovies)
 app.post('/api/movies', movieCtrl.addMovie)
 app.put('/api/movies:id', movieCtrl.editMovie)
 app.delete('/api/movies:id', movieCtrl.deleteMovie)
+
+
