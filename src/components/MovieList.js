@@ -15,6 +15,7 @@ const MovieList = () => {
         axios.get('/api/movies')
             .then(res => {
                 setMovies(...movies, res.data)
+                // console.log(res.data)
             }).catch(err => console.log(err))
     }
 
@@ -26,14 +27,14 @@ const MovieList = () => {
             .catch(err => console.log(err))
     }
 
-    // let addMovie = (title, director, image, rating) => {
-    //     axios.post('/api/movies', {title, director, image, rating})
-    //         .then((res) => {
-    //             console.log(res.data)
-    //         })
-    //         .catch(err => console.log(err));
-    // }
-
+    let editMovie = (id, title, director, image, rating) => {
+        axios.put(`/api/movies/${id}`, {title, director, image, rating})
+            .then((res) => {
+                setMovies(res.data)
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
+    }
 
 
     return (
@@ -43,7 +44,8 @@ const MovieList = () => {
                     <Movie className='card'
                         key={movie.movie_id}
                         movie={movie}
-                        delete={deleteMovie}
+                        deleteMovie={deleteMovie}
+                        editMovie={editMovie}
                     />
                 )
             })}

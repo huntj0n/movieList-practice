@@ -1,39 +1,47 @@
 import React, {useState} from 'react';
 // import axios from 'axios';
 
-const Movie = ({movie, delete: deleteFn}) => {
+const Movie = ({movie, deleteMovie, editMovie}) => {
 
 
-    // const [ edit, setEdit ] = useState(false)
+    const [ edit, setEdit ] = useState(false)
 
-    // console.log(movie)
 
-    // let toggleEdit = () => {
-    //     setEdit({
-    //         edit: !edit
-    //     })
-    // }
+
+    let toggleEdit = () => {
+        setEdit(!edit)
+        console.log(edit)
+    }
 
     
 
     return (
         <form className="card movie">
-            {/* why does this only work with props.props.whatever? */}
-            {/* <p>{props.props.title}</p>
-            <p>{props.props.director}</p>
-            <p>{props.props.image}</p>
-            <p>{props.props.rating}</p> */}
+            { edit ? (
+                <div>
 
-            {/* <button>Edit</button> */}
-            {/* <button onClick={() => props.props.delete(props.props.movie_id)}>Delete</button> */}
+                    <button onClick={() => toggleEdit()}>Cancel</button>
+                    <button onClick={() => console.log('saved')}>Save</button>
+                </div>
+            ) : (
+                <div>
+                    <p>{movie.title}</p>
+                    <p>{movie.director}</p>
+                    <p>{movie.image}</p>
+                    <p>{movie.rating}</p>
 
-            <p>{movie.title}</p>
+                    <button onClick={() => toggleEdit()}>Edit</button>
+                    <button onClick={() => deleteMovie(movie.movie_id)}>Delete</button>
+                </div>
+            ) }
+
+            {/* <p>{movie.title}</p>
             <p>{movie.director}</p>
             <p>{movie.image}</p>
             <p>{movie.rating}</p>
 
             <button>Edit</button>
-            <button onClick={() => deleteFn(movie.movie_id)}>Delete</button>
+            <button onClick={() => deleteMovie(movie.movie_id)}>Delete</button> */}
         </form>
     )
 }
