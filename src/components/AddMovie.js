@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios'
 
-const AddMovie = () => {
+const AddMovie = ({resetMovies}) => {
 
     const [title, setTitle] = useState('')
     const [director, setDirector] = useState('')
@@ -10,7 +10,6 @@ const AddMovie = () => {
 
     let titleChange = (value) => {
         setTitle(value)
-        console.log(title)
     }
     let directorChange = (value) => {
         setDirector(value)
@@ -31,7 +30,8 @@ const AddMovie = () => {
     let addMovie = (title, director, image, rating) => {
         axios.post('/api/movies', {title, director, image, rating})
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
+                resetMovies(res.data)
             })
             .catch(err => console.log(err));
         resetStateValues()

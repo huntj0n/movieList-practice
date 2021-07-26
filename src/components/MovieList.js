@@ -8,11 +8,15 @@ const MovieList = () => {
     const [ movies, setMovies ] = useState([])
 
     useEffect(() => {
+        getMovies()
+    }, []) 
+    
+    let getMovies = () => {
         axios.get('/api/movies')
             .then(res => {
-                setMovies(res.data)
+                setMovies(...movies, res.data)
             }).catch(err => console.log(err))
-    }, [movies])  
+    }
 
     let deleteMovie = (id) => {
         axios.delete(`/api/movies/${id}`)
@@ -22,21 +26,30 @@ const MovieList = () => {
             .catch(err => console.log(err))
     }
 
+    // let addMovie = (title, director, image, rating) => {
+    //     axios.post('/api/movies', {title, director, image, rating})
+    //         .then((res) => {
+    //             console.log(res.data)
+    //         })
+    //         .catch(err => console.log(err));
+    // }
+
 
 
     return (
         <section className="movieList">
             {movies.map((movie) => {
-                // console.log(movie)
                 return (
                     <Movie className='card'
                         key={movie.movie_id}
-                        props={movie}
+                        movie={movie}
                         delete={deleteMovie}
                     />
                 )
             })}
-            <AddMovie />
+            <AddMovie 
+                resetMovies = {setMovies}
+            />
         </section>
     )
 }
